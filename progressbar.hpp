@@ -40,7 +40,7 @@ namespace util {
             
                 last_time_ = now;
             
-                std::cout << "\r" << it->second << "\% [ETA: " << 
+                std::cout << "\r" << it->second << "% [ETA: " << 
                     std::chrono::duration_cast<std::chrono::minutes>(tot).count() << " minutes total / " <<
                     std::chrono::duration_cast<std::chrono::minutes>(eta).count() << " minutes left]";
                 std::cout.flush();

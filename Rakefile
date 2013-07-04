@@ -1,7 +1,7 @@
 require 'rake/clean'
 
 CXX      = 'g++'
-CXXFLAGS = '-std=c++11 -Wall -Wextra'
+CXXFLAGS = '-std=c++11 -Wall -Wextra -pedantic -fmessage-length=0'
 SOURCES  = FileList['test*.cpp']
 OBJECTS  = SOURCES.map { |file| file.ext('.o') }
 EXE      = SOURCES.map { |file| file.ext('.test') }
