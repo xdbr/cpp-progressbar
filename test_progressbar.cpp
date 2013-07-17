@@ -29,7 +29,7 @@ int main() {
         if (verbosity > 0) bar.output(i);
 
         /* This only for demonstration purposes */
-        std::chrono::milliseconds dura( 20000 );
+        std::chrono::milliseconds dura( 200 );
         std::this_thread::sleep_for( dura );
     }
 
