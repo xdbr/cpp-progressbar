@@ -15,13 +15,26 @@
 using namespace std;
 
 int main() {
+    
     const int num_iterations = 111;
     const int verbosity      = 1;
 
     /* Initialize ProgressBar with number of iterations in the
        following loop
     */
-    util::ProgressBar<decltype(num_iterations)> bar(num_iterations);
+    // util::ProgressBar<decltype(num_iterations)> bar(num_iterations);
+    // 
+    // for (const auto & i : util::range<int>(0, num_iterations)) {
+    // 
+    //     /* present output */
+    //     if (verbosity > 0) bar.output(i);
+    // 
+    //     /* This only for demonstration purposes */
+    //     std::chrono::milliseconds dura( 30 );
+    //     std::this_thread::sleep_for( dura );
+    // }
+
+    util::ProgressBar<std::chrono::microseconds> bar(num_iterations);
 
     for (const auto & i : util::range<int>(0, num_iterations)) {
 
