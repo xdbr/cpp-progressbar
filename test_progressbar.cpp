@@ -22,24 +22,24 @@ int main() {
     /* Initialize ProgressBar with number of iterations in the
        following loop
     */
-    // util::ProgressBar<decltype(num_iterations)> bar(num_iterations);
-    // 
-    // for (const auto & i : util::range<int>(0, num_iterations)) {
-    // 
-    //     /* present output */
-    //     if (verbosity > 0) bar.output(i);
-    // 
-    //     /* This only for demonstration purposes */
-    //     std::chrono::milliseconds dura( 30 );
-    //     std::this_thread::sleep_for( dura );
-    // }
+    util::ProgressBar<std::chrono::seconds> bar(num_iterations);
 
-    util::ProgressBar<std::chrono::microseconds> bar(num_iterations);
-
+    std::cout << "\nBar 1" << std::endl;
     for (const auto & i : util::range<int>(0, num_iterations)) {
 
         /* present output */
         if (verbosity > 0) bar.output(i);
+
+        /* This only for demonstration purposes */
+        std::chrono::milliseconds dura( 30 );
+        std::this_thread::sleep_for( dura );
+    }
+
+    std::cout << "\nBar 2" << std::endl;
+    for (const auto & i : util::range<int>(0, num_iterations)) {
+
+        /* present output */
+        if (verbosity > 0) bar.output2(i);
 
         /* This only for demonstration purposes */
         std::chrono::milliseconds dura( 30 );

@@ -9,6 +9,7 @@
 #include <typeinfo>
 #include <typeindex>
 #include <unordered_map>
+#include <vector>
 
 #include "vendor/cpp-range/range.hpp"
 
@@ -36,6 +37,7 @@ struct ProgressBar
     void init_type_names();
     void init_percent_map();
     void output(unsigned int i);
+    void output2(unsigned int i);
     
     unsigned int                                elements    = {0};
     unsigned int                                percent     = {0};
@@ -96,6 +98,45 @@ output(unsigned int i)
             << " " << type_names_[std::type_index(typeid(timing_unit))] << " total / "
             << chr::duration_cast<timing_unit>(eta).count()
             << " " << type_names_[std::type_index(typeid(timing_unit))] << " left]";
+        std::cout.flush();
+    } else {
+        std::cout << "\r";
+        std::cout.flush();
+    }
+}
+
+
+template
+<class timing_unit>
+void
+ProgressBar<timing_unit>::
+output2(unsigned int i)
+{
+    auto it = percentmap.find(i);
+    static std::vector<char> states = { '|', '|', '|', '|',
+                                        '/', '/', '/', '/',
+                                        '-', '-', '-', '-',
+                                        '\\', '\\', '\\', '\\'
+                                      };
+    static auto state = states.begin();
+    if (it != percentmap.end()) {
+    
+        auto now = std::chrono::steady_clock::now();
+    
+        auto diff = (now - last_time_);
+                
+        auto eta = diff*distance(it, end(percentmap));
+        auto tot = diff*100;
+    
+        last_time_ = now;
+
+        if (++state ==  end(states))
+              state = begin(states);
+
+        std::cout << "\r" << *state;
+        std::cout.flush();
+    } else {
+        std::cout << "\r";
         std::cout.flush();
     }
 }
